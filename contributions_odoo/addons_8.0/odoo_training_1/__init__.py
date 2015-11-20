@@ -3,8 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
-#    Copyright (C) 2014 (Ait-Mlouk Addi / 0672977726 / aitmlouk@gmail.com).
-#    Copyright (C) 2014 (http://aitmlouk.esy.es/)
+#    Copyright (C) 2014 Ait-Mlouk Addi <http://www.aitmlouk-addi.info>.
 
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,5 +19,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
 import hr
