@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="0">
+    	<!-- Sequences for maintenance -->
+        <record id="seq_type_madrassa_maintenance" model="ir.sequence.type">
+            <field name="name">Gestion de travaux</field>
+            <field name="code">madrassa.maintenance</field>
+        </record>
+        
+        <record id="seq_madrassa_maintenance" model="ir.sequence">
+            <field name="name">Gestion de travaux</field>
+            <field name="code">madrassa.maintenance</field>
+            <field name="prefix">TRVX-</field>
+            <field name="padding">5</field>
+        </record>
+        
+        <!-- Sequences for maintenance line -->
+        <record id="seq_type_madrassa_maintenance_line" model="ir.sequence.type">
+            <field name="name">détail de travaux</field>
+            <field name="code">madrassa.maintenance.line</field>
+        </record>
+        
+        <record id="seq_madrassa_maintenance_line" model="ir.sequence">
+            <field name="name">détail de travaux</field>
+            <field name="code">madrassa.maintenance.line</field>
+            <field name="prefix">TRVX-L-</field>
+            <field name="padding">5</field>
+        </record>
+        
+        <!-- Sequences for maintenance incident -->
+        <record id="seq_type_madrassa_maintenance_incident" model="ir.sequence.type">
+            <field name="name">incidents de travaux</field>
+            <field name="code">madrassa.maintenance.incident</field>
+        </record>
+        
+        <record id="seq_madrassa_maintenance_incident" model="ir.sequence">
+            <field name="name">incidents de travaux</field>
+            <field name="code">madrassa.maintenance.incident</field>
+            <field name="prefix">INCDT-</field>
+            <field name="padding">5</field>
+        </record>
+        
+    </data>
+</openerp>

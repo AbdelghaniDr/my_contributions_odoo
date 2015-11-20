@@ -1,0 +1,131 @@
+# -*- encoding: utf-8 -*-
+##############################################################################
+#
+#    OpenERP, Open Source Management Solution    
+#    Copyright (C) 2004-2010 Tiny SPRL (http://tiny.be). All Rights Reserved
+#    
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see http://www.gnu.org/licenses/.
+#
+##############################################################################
+from openerp.osv import osv, fields
+import time, datetime
+
+class madrassa_maintenance(osv.osv):
+
+    _name = 'madrassa.maintenance'
+    _description = u'travaux'
+    _inherit = ['mail.thread','ir.needaction_mixin']
+    
+    def create(self, cr, user, vals, context=None):
+        u"""méthode créer"""
+        if ('name' not in vals) or (vals.get('name')=='/'):
+            vals['name'] = self.pool.get('ir.sequence').get(cr, user, 'madrassa.maintenance')
+        return super(madrassa_maintenance, self).create(cr, user, vals, context) 
+    
+    def action_done(self, cr, uid, ids, context=None):
+        return self.write(cr,uid,ids,{'state' : 'done'})
+    
+    def action_cancel(self, cr, uid, ids, context=None):
+        return self.write(cr,uid,ids,{'state' : 'cancel'})
+    
+    def action_draft(self, cr, uid, ids, context=None):
+        return self.write(cr,uid,ids,{'state' : 'draft'})
+    
+    _columns = {
+            'name' : fields.char(u'Numéro',size=100,required=True),
+            'responsable' : fields.many2one('hr.employee',u'Responsable',required=True),
+            'user' : fields.many2one('res.users',u'De qui',required=True),
+            'date' : fields.datetime(u'Date',required=True),
+            'description' : fields.text(u'Détail de l\'intervention'),
+            'percent' : fields.float(u'Pourcentage'),
+            'amount' : fields.float(u'Montant'),
+            'line_ids' : fields.one2many('madrassa.maintenance.line','maintenance',u'Détails'),
+            'incident_ids' : fields.one2many('madrassa.maintenance.incident','maintenance',u'Incidents'),
+            'state' : fields.selection([('draft',u'En cours'),('done',u'Validé'),('cancel',u'Annulé')],u'Statut',required=True),
+        }
+    
+    _defaults = {  
+        'state': lambda *a: 'draft',
+        'user' : lambda x, y, z, c: z,
+        'name': lambda self, cr, uid, context: '/',
+        'date': lambda *a : time.strftime('%Y-%m-%d'),
+        }
+madrassa_maintenance()
+
+class madrassa_maintenance_line(osv.osv):
+
+    _name = 'madrassa.maintenance.line'
+    _description = u'travaux'
+    _order = 'maintenance desc, date_start desc'
+    
+    def create(self, cr, user, vals, context=None):
+        u"""méthode créer"""
+        if ('name' not in vals) or (vals.get('name')=='/'):
+            vals['name'] = self.pool.get('ir.sequence').get(cr, user, 'madrassa.maintenance.line')
+        return super(madrassa_maintenance_line, self).create(cr, user, vals, context) 
+    
+    def _get_delay(self,cr,uid,ids,prop, unknow_none, context={}):
+        data = {}
+        for data_read in self.read(cr,uid,ids,['date_start','date_stop']):
+#            data[data_read['id']] = data_read['date_stop'] - data_read['date_start']
+            data[data_read['id']] = 3
+        return data
+    
+    _columns = {
+            'name' : fields.char(u'Référence',size=100,required=True),
+            'maintenance' : fields.many2one('madrassa.maintenance',u'Travaux',required=True),
+            'responsable' : fields.many2one('hr.employee',u'Responsable',required=True),
+            'user' : fields.many2one('res.users',u'utilisateur',required=True),
+            'description' : fields.text(u'Détail'),
+            'amount' : fields.float(u'Montant',required=True),
+            'date_start' : fields.datetime(u'Date début',required=True),
+            'date_end' : fields.datetime(u'Date fin',required=True),
+            'delay' : fields.function(_get_delay,type='float',string='Délai'),
+        }
+    
+    _defaults = {  
+        'user' : lambda x, y, z, c: z,
+        'name': lambda self, cr, uid, context: '/',
+        'date_start': lambda *a : time.strftime('%Y-%m-%d %H:%M:%S'),
+        }
+madrassa_maintenance_line()
+
+class madrassa_maintenance_incident(osv.osv):
+
+    _name = 'madrassa.maintenance.incident'
+    _description = u'Incidents'
+    _order = 'maintenance desc, date desc'
+    
+    def create(self, cr, user, vals, context=None):
+        u"""méthode créer"""
+        if ('name' not in vals) or (vals.get('name')=='/'):
+            vals['name'] = self.pool.get('ir.sequence').get(cr, user, 'madrassa.maintenance.incident')
+        return super(madrassa_maintenance_incident, self).create(cr, user, vals, context) 
+    
+    _columns = {
+            'name' : fields.char(u'Référence',size=100,required=True),
+            'maintenance' : fields.many2one('madrassa.maintenance',u'Travaux',required=True),
+            'responsable' : fields.many2one('hr.employee',u'Responsable',required=True),
+            'user' : fields.many2one('res.users',u'utilisateur',required=True),
+            'description' : fields.text(u'Incident'),
+            'date' : fields.datetime(u'Date',required=True),
+        }
+    
+    _defaults = {  
+        'user' : lambda x, y, z, c: z,
+        'name': lambda self, cr, uid, context: '/',
+        'date': lambda *a : time.strftime('%Y-%m-%d %H:%M:%S'),
+        }
+madrassa_maintenance_incident()

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    
+    	<!-- ======================madrassa maintenance menus ========================================== -->
+    	
+    	<menuitem id="base.menu_madrassa_maintenance_parent" name="Travaux" web_icon="images/maintenance.png" web_icon_hover="images/maintenance-hover.png"  sequence="18"  />
+    	
+    		 <menuitem id="menu_maintenance" name="Travaux" parent="base.menu_madrassa_maintenance_parent" sequence="1" />
+    		 
+    		 	<menuitem id="menu_maintenance_list" name="Travaux" parent="menu_maintenance" sequence="1" action="action_madrassa_maintenance"  />
+    		 	
+    		 	<menuitem id="menu_maintenance_task_list" name="Tâches" parent="menu_maintenance" sequence="2" action="action_madrassa_maintenance_line"  />
+    		 	
+    		 	<menuitem id="menu_maintenance_incident_list" name="Incidents" parent="menu_maintenance" sequence="3" action="action_madrassa_maintenance_incident"  />
+    		
+    		<menuitem id="menu_maintenance_equipment" name="outils" parent="base.menu_madrassa_maintenance_parent" sequence="1" />
+    		 
+    		 	<menuitem id="menu_maintenance_equipment_list" name="Matériel" parent="menu_maintenance_equipment" sequence="1" action="action_madrassa_product_product_material"  />
+    
+    </data>
+</openerp>

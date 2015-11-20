@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    
+    <!-- ============================books================================================================= -->
+    
+    <!-- action material -->
+    
+    <record id="action_madrassa_product_product_material" model="ir.actions.act_window">
+            <field name="name">Matériels</field>
+            <field name="res_model">product.product</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('type','in',('product','consu'))]</field>
+            <field name="context">{'default_type' : 'product'}</field>
+            <field name="search_view_id" ref="product.product_search_form_view"/>
+   	</record>
+    
+    
+    <record id="act_view_madrassa_product_product_material_form" model="ir.actions.act_window.view">
+            <field eval="3" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="product.product_normal_form_view"/>
+            <field name="act_window_id" ref="action_madrassa_product_product_material"/>
+    </record>
+    
+    <record id="act_view_madrassa_product_product_material_tree" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="product.product_product_tree_view"/>
+            <field name="act_window_id" ref="action_madrassa_product_product_material"/>
+    </record>
+    
+    <record id="act_view_madrassa_product_product_material_kanban" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="product.product_kanban_view"/>
+            <field name="act_window_id" ref="action_madrassa_product_product_material"/>
+    </record>
+    	
+    
+    </data>
+</openerp>

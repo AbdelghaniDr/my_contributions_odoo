@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_madrassa_event_attendance_all,madrassa.event.attendance.all,model_madrassa_event_attendance,,1,1,1,1
+
+access_madrassa_event_pedagogical_travel_all,madrassa.event.pedagogical.travel.all,model_madrassa_event_pedagogical_travel,,1,1,1,1
+
+access_madrassa_event_attendance_line_all,madrassa.event.attendance.line.all,model_madrassa_event_attendance_line,,1,1,1,1
+
+access_madrassa_event_report_attendance_by_year_all,madrassa.event.report.attendance.by.year.all,model_madrassa_event_report_attendance_by_year,,1,1,1,1
+
+access_madrassa_event_report_max_absence_by_classroom_all,madrassa.event.report.max.absence.by.classroom.all,model_madrassa_event_report_max_absence_by_classroom,,1,1,1,1
+
+access_madrassa_event_report_max_delay_by_classroom_all,madrassa.event.report.max.delay.by.classroom.all,model_madrassa_event_report_max_delay_by_classroom,,1,1,1,1
+
+
+access_madrassa_event_report_request_by_year_all,madrassa.event.report.request.by.year.all,model_madrassa_event_report_request_by_year,,1,1,1,1
+
+

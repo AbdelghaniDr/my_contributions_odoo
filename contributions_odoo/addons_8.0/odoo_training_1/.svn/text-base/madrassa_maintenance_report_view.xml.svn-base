@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    
+    	<report auto="False" id="report_madrassa_event_attendance" model="madrassa.event.attendance" name="madrassa.event.attendance"
+                rml="madrassa_event/report/attendance.rml" string="Fiche de présence"
+                usage="default"/>
+                
+        <report auto="False" id="report_madrassa_event_pedagogical_travel" model="madrassa.event.pedagogical.travel" name="madrassa.event.pedagogical.travel"
+                rml="madrassa_event/report/travel.rml" string="sortie pédagogique"
+                usage="default"/>
+    
+    </data>
+</openerp>
